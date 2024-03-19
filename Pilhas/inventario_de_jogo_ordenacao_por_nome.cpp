@@ -43,7 +43,7 @@ class Pilha {
         inline void Topo();
         // Informa se a pilha está Vazia.
         inline bool Vazia();
-        void RemoverValores(int valor);
+        void Ordenar();
     private:
         Noh* mPtTopo;
         int length;
@@ -99,27 +99,23 @@ bool Pilha::Vazia() {
     return this->length == 0;
 }
 
-void Pilha::RemoverValores(int valor) {
-    if (this->Vazia()) throw runtime_error("Erro: pilha vazia!");
-    else {
-        Pilha aux = Pilha();
+void Pilha::Ordenar() {
+    Dado aux;
+    Pilha aux2 = Pilha();
 
-        while(!this->Vazia()) {
-            Dado aux2 = this->Desempilhar();
+    while(!this->Vazia()) {
+        aux = this->Desempilhar();
 
-            if(aux2.valor < valor) {
-                imprimir_dado(aux2);
-            }
-            else {
-                aux.Empilhar(aux2);
-            }
+        while(!aux2.Vazia() && aux2.mPtTopo->mDado.nome > aux.nome) {
+            this->Empilhar(aux2.Desempilhar());
         }
 
-        while(!aux.Vazia()) {
-            this->Empilhar(aux.Desempilhar());
-        }
+        aux2.Empilhar(aux);
     }
-    
+
+    while(!aux2.Vazia()) {
+        this->Empilhar(aux2.Desempilhar());
+    }
 }
 
 
@@ -127,7 +123,6 @@ int main() {
     Pilha pilha;
     Dado info;
     char comando;
-    int valor;
     do {
         try{
             cin >> comando;
@@ -145,9 +140,8 @@ int main() {
                 case 'e': // espiar                
                     pilha.Topo();
                     break;
-                case 'x':
-                    cin >> valor;
-                    pilha.RemoverValores(valor);
+                case 'o':
+                    pilha.Ordenar();
                     break;
                 case 'f': // finalizar
                     // checado no do-while
