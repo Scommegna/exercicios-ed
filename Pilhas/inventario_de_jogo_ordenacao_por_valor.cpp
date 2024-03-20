@@ -43,6 +43,7 @@ class Pilha {
         inline void Topo();
         // Informa se a pilha está Vazia.
         inline bool Vazia();
+        void Ordenar();
     private:
         Noh* mPtTopo;
         int length;
@@ -98,6 +99,25 @@ bool Pilha::Vazia() {
     return this->length == 0;
 }
 
+void Pilha::Ordenar() {
+    Dado aux;
+    Pilha aux2 = Pilha();
+
+    while(!this->Vazia()) {
+        aux = this->Desempilhar();
+
+        while(!aux2.Vazia() && aux2.mPtTopo->mDado.valor > aux.valor) {
+            this->Empilhar(aux2.Desempilhar());
+        }
+
+        aux2.Empilhar(aux);
+    }
+
+    while(!aux2.Vazia()) {
+        this->Empilhar(aux2.Desempilhar());
+    }
+}
+
 
 int main() {
     Pilha pilha;
@@ -119,6 +139,9 @@ int main() {
                     break;
                 case 'e': // espiar                
                     pilha.Topo();
+                    break;
+                case 'o':
+                    pilha.Ordenar();
                     break;
                 case 'f': // finalizar
                     // checado no do-while
