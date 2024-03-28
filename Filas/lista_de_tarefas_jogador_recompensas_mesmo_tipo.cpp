@@ -118,21 +118,23 @@ bool Fila::Vazia() {
 void Fila::ImprimePremio(char t) {
     Fila aux = Fila();
     int counter = 0;
+    int sizeAux = this->size;
 
-    while(!this->Vazia()) {
+    while(sizeAux != 0) {
         Dado aux2 = this->Desenfileirar();
 
         if(aux2.tipo == t) {
             counter += aux2.premio;
+            aux.Enfileirar(aux2);
+        } else {
+            this->Enfileirar(aux2);
         }
 
-        
+        sizeAux--;
+    }
 
-        // while(!aux.Vazia() && this->mPtPrimeiro->mDado.tipo == t) {
-        //     this->Enfileirar(aux.Desenfileirar());
-        // }
-
-        // aux.Enfileirar(aux2);
+    while(!this->Vazia()) {
+        aux.Enfileirar(this->Desenfileirar());
     }
 
     while(!aux.Vazia()) {
