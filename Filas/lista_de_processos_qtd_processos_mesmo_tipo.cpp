@@ -43,7 +43,7 @@ class Fila {
         inline bool Vazia();
         // Informa se a fila está Cheia.
         inline bool Cheia();
-        void Ordenar();
+        void ImprimirMesmoTipo(char t);
 };
 
 Fila::Fila(){
@@ -110,18 +110,22 @@ bool Fila::Cheia() {
     return this->tam == CAPACIDADE_FILA;
 }
 
-void Fila::Ordenar() {
+void Fila::ImprimirMesmoTipo(char t) {
     Fila aux = Fila();
+    int counter = 0;
 
     while(!this->Vazia()) {
         Dado aux2 = this->Desenfileirar();
 
-        while(!aux.Vazia() && aux.mFila[this->posPrimeiro].nProcesso > aux2.nProcesso) {
-            this->Enfileirar(aux.Desenfileirar());
+        if(aux2.tipo == t) {
+            cout << "Processo: " << aux2.nProcesso << endl;
+            counter++;
         }
 
         aux.Enfileirar(aux2);
     }
+
+    cout << "Numero de processos: " << counter << endl;
 
     while(!aux.Vazia()) {
         this->Enfileirar(aux.Desenfileirar());
@@ -133,6 +137,7 @@ int main() {
     Fila fila;
     Dado info;
     char comando;
+    char tipo;
     do {
         try {
             cin >> comando;
@@ -153,8 +158,9 @@ int main() {
                     else
                         cout << "Erro: fila vazia!"<< endl;
                     break;
-                case 'o': 
-                    fila.Ordenar();
+                case 'c': 
+                    cin >> tipo;
+                    fila.ImprimirMesmoTipo(tipo);
                     break;
                 case 'f': // finalizar
                     // checado no do-while
