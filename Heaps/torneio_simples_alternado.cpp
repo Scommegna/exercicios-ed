@@ -14,7 +14,7 @@ private:
     inline int esquerda(int getPai);
     inline int direita(int getPai);
     void arruma();
-    void compete(int i);
+    void compete(int i, bool muda);
 
 public:
     torneio(int vet[], int tam);
@@ -63,34 +63,57 @@ int torneio::direita(int pai)
 
 void torneio::arruma()
 {
+    bool muda = true;
     for (int i = inicioDados - 1; i >= 0; i--)
     {
-        compete(i);
+        compete(i, muda);
+        muda = !muda;
     }
 }
 
-void torneio::compete(int i)
+void torneio::compete(int i, bool muda)
 {
     int esq = esquerda(i);
     int dir = direita(i);
     int maior = -1;
 
-    if (esq < capacidade)
-    {
-        if ((dir < this->capacidade) && (this->heap[dir] > this->heap[esq]))
+
+    if (muda == true) {
+        if (esq < capacidade)
         {
-            maior = dir;
+            if ((dir < this->capacidade) && (this->heap[dir] > this->heap[esq]))
+            {
+                maior = dir;
+            }
+            else
+            {
+                maior = esq;
+            }
+                this->heap[i] = this->heap[maior];
         }
         else
         {
-            maior = esq;
+            this->heap[i] = -1;
         }
-        this->heap[i] = this->heap[maior];
+    } else {
+        if (esq < capacidade)
+        {
+            if ((dir < this->capacidade) && (this->heap[dir] < this->heap[esq]))
+            {
+                maior = dir;
+            }
+            else
+            {
+                maior = esq;
+            }
+                this->heap[i] = this->heap[maior];
+        }
+        else
+        {
+            this->heap[i] = -1;
+        }
     }
-    else
-    {
-        this->heap[i] = -1;
-    }
+    
 }
 
 void torneio::verBaseMaior()
