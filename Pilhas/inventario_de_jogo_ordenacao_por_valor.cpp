@@ -3,13 +3,13 @@
 
 using namespace std;
 
+//Lucas Scommegna - 202310208
 struct Dado {
     string nome;
     char tipo;
     int valor;
 };
 
-// Imprime as informações de um dado qualquer
 void imprimir_dado(const Dado& umDado) {
     cout << "Nome: " << umDado.nome << " " << "Tipo: " << umDado.tipo << " " << "Valor: " << umDado.valor << endl;
 }
@@ -17,7 +17,7 @@ void imprimir_dado(const Dado& umDado) {
 class Noh {
     friend class Pilha;
     private:
-        Dado mDado; // poderia ser outro tipo de variável
+        Dado mDado; 
         Noh* mProx;
     public:
         Noh(Dado v) {
@@ -28,20 +28,12 @@ class Noh {
 
 class Pilha {
     public:
-        // Constrói pilha vazia.
         Pilha();
-        // Destrutor que desaloca memória.
         ~Pilha();
-        // Retira e retorna o valor que estiver no mPtTopo da pilha.
-        // Escreve uma mensagem de erro se não for possível desempilhar.
-        Dado Desempilhar(); // retorna o mPtTopo da Pilha.
-        // Insere um valor na pilha.
+        Dado Desempilhar();
         void Empilhar(const Dado& d);
-        // Apagar todos os dados da pilha.
         void LimparTudo();
-        // Imprime o valor que está no mPtTopo sem desempilhar.
         inline void Topo();
-        // Informa se a pilha está Vazia.
         inline bool Vazia();
         void Ordenar();
     private:

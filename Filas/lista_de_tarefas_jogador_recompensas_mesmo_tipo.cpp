@@ -1,13 +1,9 @@
-/* Classe Fila encadeada
- *
- * by Renato Ramos da Silva, 2023, Estruturas de Dados
- *
- */
 #include <iostream>
 #include <stdexcept>
 
 using namespace std;
 
+//Lucas Scommegna - 202310208
 struct Dado {
     string nome;
     int premio;
@@ -15,7 +11,7 @@ struct Dado {
     int tempo;
 };
 
-// Imprime as informações de um dado qualquer
+
 void imprimir_dado(const Dado& umDado) {
     cout << "Nome: " << umDado.nome << " Premio: " << umDado.premio << " Tipo: " << umDado.tipo << " tempo: " << umDado.tempo << endl;
 }
@@ -23,7 +19,7 @@ void imprimir_dado(const Dado& umDado) {
 class Noh {
     friend class Fila;
     private:
-        Dado mDado; // poderia ser outro tipo de variável
+        Dado mDado; 
         Noh* mProx;
     public:
         Noh(Dado v) {
@@ -34,20 +30,12 @@ class Noh {
 
 class Fila {
     public:
-        // Constrói Fila vazia.
         Fila();
-        // Destrutor que desaloca memória.
         ~Fila();
-        // Retira e retorna o elemento que estiver na frente da Fila.
-        // Escreve uma mensagem de erro se não for possível desenfileirar.
         Dado Desenfileirar(); 
-        // Insere um elemento na Fila.
         void Enfileirar(const Dado& d);
-        // Apagar todos os dados da Fila.
         void LimparTudo();
-        // Retorna o elemento que está na frente da Fila, sem desenfileirar.
         inline void Primeiro();
-        // Informa se a Fila está Vazia.
         inline bool Vazia();
         void ImprimePremio(char t);
     private:

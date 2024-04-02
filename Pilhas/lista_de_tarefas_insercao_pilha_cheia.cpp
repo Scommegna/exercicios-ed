@@ -1,8 +1,3 @@
-/* Classe pilha estatica
- *
- * by Renato Ramos da Silva, 2023, Estruturas de Dados
- *
- */
 #include <iostream>
 
 using namespace std;
@@ -10,13 +5,14 @@ using namespace std;
 const int PILHAVAZIA = -1;
 const int TAMANHOPILHA = 6;
 
+//Lucas Scommegna - 202310208
 struct Dado {
     string nome;
     char tipo;
     int valor;
 };
 
-// Imprime informações de um dado qualquer.
+
 void imprimir_dado(const Dado& umDado){
     cout<< "Nome: " << umDado.nome << " ";
     cout<< "Tipo: " << umDado.tipo << " ";
@@ -28,21 +24,13 @@ class Pilha {
         Dado* mPilha;
         int posTopo;
     public:
-        // Constrói pilha vazia.
         Pilha();
-        // Destrutor que desaloca memória.
         ~Pilha();
-        // Retira e retorna o valor que estiver no topo da pilha.
         Dado Desempilhar(); 
-        // Insere um elemento na pilha.
         void Empilhar(const Dado& d);
-        // Apagar todos os dados da pilha.
         void LimparTudo();
-        // Imprime o valor que está no topo sem desempilhar.
         inline void Topo();
-        // Informa se a pilha está Vazia.
         inline bool Vazia();
-        // Informa se a pilha está Cheia.
         inline bool Cheia();
 };
 

@@ -3,7 +3,9 @@
 #include <algorithm>
 using namespace std;
 
-class torneio
+
+//Lucas Scommegna - 202310208
+class Torneio
 {
 private:
     int *heap;
@@ -17,15 +19,15 @@ private:
     void compete(int i, bool muda);
 
 public:
-    torneio(int vet[], int tam);
-    ~torneio();
+    Torneio(int vet[], int tam);
+    ~Torneio();
     void verBaseMaior();
 };
 
-torneio::torneio(int vet[], int tam)
+Torneio::Torneio(int vet[], int tam)
 {
     this->capacidade = 1;
-    while (capacidade < tam)
+    while (this->capacidade < tam)
     {
         this->capacidade *= 2;
     }
@@ -33,45 +35,45 @@ torneio::torneio(int vet[], int tam)
     this->capacidade = this->capacidade - 1 + tam;
 
     this->heap = new int[this->capacidade];
-    inicioDados = this->capacidade - tam;
+    this->inicioDados = this->capacidade - tam;
 
-    memcpy(&heap[inicioDados], vet, tam * sizeof(int));
+    memcpy(&heap[this->inicioDados], vet, tam * sizeof(int));
 
     this->tamanho = tam;
-    arruma();
+    this->arruma();
 }
 
-torneio::~torneio()
+Torneio::~Torneio()
 {
     delete [] this->heap;
 }
 
-int torneio::pai(int filho)
+int Torneio::pai(int filho)
 {
     return (filho - 1) / 2;
 }
 
-int torneio::esquerda(int pai)
+int Torneio::esquerda(int pai)
 {
     return 2 * pai + 1;
 }
 
-int torneio::direita(int pai)
+int Torneio::direita(int pai)
 {
     return 2 * pai + 2;
 }
 
-void torneio::arruma()
+void Torneio::arruma()
 {
     bool muda = true;
-    for (int i = inicioDados - 1; i >= 0; i--)
+    for (int i = this->inicioDados - 1; i >= 0; i--)
     {
         compete(i, muda);
         muda = !muda;
     }
 }
 
-void torneio::compete(int i, bool muda)
+void Torneio::compete(int i, bool muda)
 {
     int esq = esquerda(i);
     int dir = direita(i);
@@ -116,7 +118,7 @@ void torneio::compete(int i, bool muda)
     
 }
 
-void torneio::verBaseMaior()
+void Torneio::verBaseMaior()
 {
     cout << this->heap[0];
 }
@@ -133,7 +135,7 @@ int main()
         cin >> vet[i];
     }
 
-    torneio participantes(vet, tam);
+    Torneio participantes(vet, tam);
 
     participantes.verBaseMaior();
 

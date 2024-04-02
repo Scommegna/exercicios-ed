@@ -1,14 +1,10 @@
-/*
-    MaxHeap, para alteração de prioridade
-    by joukim & bruno, 2019
-    alterado em 2023 by Renato
-*/
-
 #include <iostream>
-#include <utility> // para usar swap
-#include <stdexcept> // para usar exceção com runtime_error
+#include <utility> 
+#include <stdexcept> 
 
 using namespace std;
+
+//Lucas Scommegna - 202310208
 
 struct dado {
     string nomeTarefa;

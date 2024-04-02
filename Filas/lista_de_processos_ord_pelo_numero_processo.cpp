@@ -1,14 +1,11 @@
-/* Classe fila estatica
- *
- * by Renato Ramos da Silva, 2023, Estruturas de Dados
- *
- */
 #include <iostream>
 
 using namespace std;
 
 const int FILAVAZIA = -1;
 const int CAPACIDADE_FILA = 6;
+
+//Lucas Scommegna - 202310208
 
 struct Dado {
     string nome;
@@ -17,7 +14,6 @@ struct Dado {
     int nProcesso;
 };
 
-// Imprime informações de um dado qualquer.
 void imprimir_dado(const Dado& umDado){
     cout << "Nome: " << umDado.nome << " Assunto: " << umDado.assunto << " Tipo: " << umDado.tipo << " Processo: " << umDado.nProcesso << endl;
 }
@@ -27,21 +23,13 @@ class Fila {
         Dado* mFila;
         int posPrimeiro, posUltimo, tam;
     public:
-        // Constrói fila vazia.
         Fila();
-        // Destrutor que desaloca memória.
         ~Fila();
-        // Retira e retorna o elemento que estiver na primeira posição.
         Dado Desenfileirar(); 
-        // Insere um elemento na fila.
         void Enfileirar(const Dado& d);
-        // Apagar todos os dados da fila.
         void LimparTudo();
-        // Imprime os valores do elemento que está na frente da fila, sem Desenfileirar.
         inline void PrimeiroDaFila();
-        // Informa se a fila está Vazia.
         inline bool Vazia();
-        // Informa se a fila está Cheia.
         inline bool Cheia();
         void Ordenar();
 };
