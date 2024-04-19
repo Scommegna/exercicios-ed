@@ -154,9 +154,9 @@ class tabelaHash {
         unsigned numPosicoes;
         // converte uma chave (string) num endereço da tabela 
         // - versão simples
-        unsigned funcaoHash(const string& s) {
-            return funcaoHash(s, numPosicoes);
-        } 
+        // unsigned funcaoHash(const string& s) {
+        //     return funcaoHash(s, numPosicoes);
+        // } 
         // converte uma chave (string) num endereço da tabela 
         // - versão para redimensionamento
         unsigned funcaoHash(const string& s, int cap) {
