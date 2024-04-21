@@ -155,9 +155,11 @@ void listadup::insereNaPosicao(int posicao, acaoPrograma acao){
         }
 
         valor->proximo = aux->proximo;
-        aux->proximo->anterior = valor;
         valor->anterior = aux;
         aux->proximo = valor;
+        aux = aux->proximo->proximo;
+        aux->anterior = valor;
+        
 
         this->tamanho++;
     }
@@ -165,7 +167,7 @@ void listadup::insereNaPosicao(int posicao, acaoPrograma acao){
                    
 
 int listadup::procura(string valor) {
-    if(this->vazia()) throw runtime_error("Nao encontrado");
+    if(this->vazia()) throw runtime_error("Lista vazia!");
 
     noh *aux = this->primeiro;
     int pos = 0;
@@ -194,6 +196,8 @@ void listadup::imprime() {
     aux = aux->proximo;
    }
 
+   cout << "IMPRIMINDO REVERSO" << endl;
+
    aux = this->ultimo;
 
    while(aux != NULL) {
@@ -220,6 +224,7 @@ void listadup::removeNoInicio() {
     }
 
     aux->proximo = NULL;
+
     delete aux;
 
     this->tamanho--;
