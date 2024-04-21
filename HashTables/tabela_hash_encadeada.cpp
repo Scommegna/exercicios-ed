@@ -70,16 +70,31 @@ class lista {
                 return false;
             } 
 
-            noh *ant = this->primeiro;
-            noh *aux = this->primeiro->proximo;
+            noh *aux = this->primeiro;
 
-            while(aux->chave != c || aux != NULL) {
+            if(aux->chave == c) {
+                this->primeiro = aux->proximo;
+                delete aux;
+                this->numElementos--;
+
+                return true;
+            }
+
+            noh *ant = this->primeiro;
+            aux = this->primeiro->proximo;
+            
+
+            while(aux != NULL) {
                 if(aux->chave == c) {
                     ant->proximo = aux->proximo;
                     aux->proximo = NULL;
                     delete aux;
 
                     this->numElementos--;
+
+                    if(this->numElementos == 0) {
+                        this->primeiro = NULL;
+                    }
 
                     return true;
                 }
@@ -102,7 +117,7 @@ class lista {
 
             noh *aux = this->primeiro;
 
-            while(aux->chave != c || aux != NULL) {
+            while(aux != NULL) {
                 if(aux->chave == c) {
                     tipoBuscado = aux->tipo;
                     valorBuscado = aux->valor;
@@ -124,7 +139,7 @@ class lista {
 
             noh *aux = this->primeiro;
 
-            while(aux->chave != c || aux != NULL) {
+            while(aux != NULL) {
                 if(aux->chave == c) {
                     return true;
                 }
@@ -154,9 +169,9 @@ class tabelaHash {
         unsigned numPosicoes;
         // converte uma chave (string) num endereço da tabela 
         // - versão simples
-        // unsigned funcaoHash(const string& s) {
-        //     return funcaoHash(s, numPosicoes);
-        // } 
+        unsigned funcaoHash(const string& s) {
+            return funcaoHash(s, numPosicoes);
+        } 
         // converte uma chave (string) num endereço da tabela 
         // - versão para redimensionamento
         unsigned funcaoHash(const string& s, int cap) {
