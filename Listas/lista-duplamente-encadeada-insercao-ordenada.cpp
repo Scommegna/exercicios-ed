@@ -59,7 +59,6 @@ public:
     inline bool vazia();
     void removeNoFim();
     void removeNoInicio();
-    void ordena();
 };
 
 
@@ -113,9 +112,21 @@ void listadup::insereNoFim(acaoPrograma acao) {
         this->primeiro = novo;
         this->ultimo = novo;
     } else {
-        novo->anterior = this->ultimo;
-        this->ultimo->proximo = novo;
-        this->ultimo = novo;
+        noh *aux = this->ultimo;
+
+        while(aux->acao.identificador > novo->acao.identificador && aux != NULL) {
+            aux = aux->anterior;
+        }
+
+        novo->proximo = aux->proximo;
+        novo->anterior = aux;
+        aux->proximo = novo;
+
+        aux = novo->proximo;
+
+        if(aux != NULL) {
+            aux->anterior = novo;
+        }
     }
 
     this->tamanho++;
@@ -129,9 +140,21 @@ void listadup::insereNoInicio(acaoPrograma acao) {
         this->primeiro = novo;
         this->ultimo = novo;
     } else {
-        novo->proximo = this->primeiro;
-        this->primeiro->anterior = novo;
-        this->primeiro = novo;
+        noh *aux = this->primeiro;
+
+        while(aux->acao.identificador < novo->acao.identificador && aux != NULL) {
+            aux = aux->proximo;
+        }
+
+        novo->proximo = aux;
+        novo->anterior = aux->anterior;
+        aux->anterior = novo;
+
+        aux = novo->anterior;
+
+        if(aux != NULL) {
+            aux->proximo = novo;
+        }
     }
 
     this->tamanho++;
@@ -141,29 +164,8 @@ void listadup::insereNoInicio(acaoPrograma acao) {
 void listadup::insereNaPosicao(int posicao, acaoPrograma acao){
     if(posicao < 0 || posicao > this->tamanho - 1) throw runtime_error("Posição Inexistente!");
 
-    if(posicao == 0) {
-        this->insereNoInicio(acao);
-    } else if(posicao == this->tamanho - 1) {
-        this->insereNoFim(acao);
-    } else {
-        noh *valor = new noh(acao);
-        int pos = 0;
-        noh *aux = this->primeiro;
 
-        while(pos != posicao - 1) {
-            aux = aux->proximo;
-            pos++;
-        }
-
-        valor->proximo = aux->proximo;
-        valor->anterior = aux;
-        aux->proximo = valor;
-        aux = aux->proximo->proximo;
-        aux->anterior = valor;
-        
-
-        this->tamanho++;
-    }
+    this->insereNoInicio(acao);
 }
                    
 
@@ -257,23 +259,7 @@ void listadup::removeNoFim() {
     }
 }
 
-void listadup::ordena() {
-    noh *aux1 = this->primeiro;
-    noh *aux2 = this->primeiro;
-    noh *aux3 = this->primeiro;
 
-    while(aux1 != NULL) {
-        while(aux2 != NULL) {
-            aux2 = aux2->proximo;
-
-            if(aux2->acao.identificador < aux3->acao.identificador) {
-                aux3 = aux2;
-            }
-        }
-    }
-
-    
-}
 
 
 int main() {
