@@ -1,7 +1,4 @@
-/* 
- * Tabela Hash com tratamento de colisão por endereçamento aberto
- * by Joukim, 2019
- */ 
+//lucas scommegna
 
 #include <iostream>
 #include <exception>
